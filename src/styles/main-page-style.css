@@ -1,0 +1,9 @@
+body{
+    background: beige;
+}
+
+.greeting {
+    /*font-weight: bold;*/
+    font-family: 'Dancing Script', cursive;
+    color: red;
+}
