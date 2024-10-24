@@ -9,7 +9,7 @@ const data = [
     { option: 'Love and Relationships', style: { backgroundColor: '#FFDAB9', textColor: '#000' } },
     { option: 'Courage and Perseverance', style: { backgroundColor: '#FFB6C1', textColor: '#000' } },
     { option: 'Gratitude and Positivity', style: { backgroundColor: '#FFFACD', textColor: '#000' } },
-    { option: 'Reasons Why I love you', style: { backgroundColor: '#98FB98', textColor: '#000' } },
+    { option: 'Reasons Why I Love You', style: { backgroundColor: '#98FB98', textColor: '#000' } },
 ];
 
 export const MainPage = () => {
