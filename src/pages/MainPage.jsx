@@ -1,7 +1,7 @@
 import { Wheel } from "react-custom-roulette";
 import { useState } from "react";
 import '../styles/main-page-style.css';
-import quotes from '../data/Quotes.json';
+import quotesData from '../data/Quotes.json'; // Import your JSON file
 
 const data = [
     { option: 'Faith and Christianity', style: { backgroundColor: '#ADD8E6', textColor: '#000' } },
@@ -9,13 +9,17 @@ const data = [
     { option: 'Love and Relationships', style: { backgroundColor: '#FFDAB9', textColor: '#000' } },
     { option: 'Courage and Perseverance', style: { backgroundColor: '#FFB6C1', textColor: '#000' } },
     { option: 'Gratitude and Positivity', style: { backgroundColor: '#FFFACD', textColor: '#000' } },
-    { option: 'Reason Why I love you', style: { backgroundColor: '#98FB98', textColor: '#000' } },
+    { option: 'Reasons Why I love you', style: { backgroundColor: '#98FB98', textColor: '#000' } },
 ];
 
 export const MainPage = () => {
     const [mustSpin, setMustSpin] = useState(false);
     const [prizeNumber, setPrizeNumber] = useState(0);
     const [quote, setQuote] = useState('');
+    const [author, setAuthor] = useState('');
+
+    // Make a copy of the quotes so you don't mutate the original data
+    const quotes = [...quotesData];
 
     const handleSpinClick = () => {
         if (!mustSpin) {
@@ -23,15 +27,27 @@ export const MainPage = () => {
             setPrizeNumber(newPrizeNumber);
             setMustSpin(true);
         }
-    }
+    };
 
     const getRandomQuote = (category) => {
-        // Filter quotes by selected category
-        const categoryQuotes = quotes.filter(q => q.Category === category);
+        // Filter quotes by selected category and pick only those with Status 0
+        const categoryQuotes = quotes.filter(q => q.Category === category && q.Status === 0);
+
+        if (categoryQuotes.length === 0) {
+            return { sentence: "No more new quotes available.", source: "" }; // No more new quotes in this category
+        }
+
         // Get a random quote from the filtered category
         const randomQuote = categoryQuotes[Math.floor(Math.random() * categoryQuotes.length)];
-        return randomQuote ? `"${randomQuote.Sentence}" - ${randomQuote.Source}` : "No quote available.";
-    }
+
+        // Mark the quote as picked by changing its status to 1
+        const quoteIndex = quotes.findIndex(q => q.Sentence === randomQuote.Sentence);
+        if (quoteIndex !== -1) {
+            quotes[quoteIndex].Status = 1; // Change the status to 1
+        }
+
+        return { sentence: randomQuote.Sentence, source: randomQuote.Source };
+    };
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh' }}>
@@ -49,7 +65,9 @@ export const MainPage = () => {
                 onStopSpinning={() => {
                     setMustSpin(false);
                     // Set a random quote after the wheel stops spinning
-                    setQuote(getRandomQuote(data[prizeNumber].option));
+                    const selectedQuote = getRandomQuote(data[prizeNumber].option);
+                    setQuote(selectedQuote.sentence);
+                    setAuthor(selectedQuote.source);
                 }}
             />
 
@@ -71,9 +89,23 @@ export const MainPage = () => {
                 SPIN
             </button>
 
-            {quote && <div className="quote-display" style={{ marginTop: '20px', fontStyle: 'italic', textAlign: 'center' }}>
-                <p>{quote}</p>
-            </div>}
+            {quote && (
+                <div
+                    className="quote-display"
+                    style={{
+                        marginTop: '20px',
+                        fontStyle: 'italic',
+                        textAlign: 'center',
+                        backgroundColor: '#f0f8ff', // Light blue background for the quote
+                        padding: '20px',
+                        borderRadius: '10px',
+                        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                    }}
+                >
+                    <p style={{ fontSize: '18px', color: '#333' }}>{quote}</p>
+                    {author && <p style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '10px', color: '#666' }}>- {author}</p>}
+                </div>
+            )}
         </div>
     );
-}
+};
