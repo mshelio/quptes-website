@@ -1,6 +1,7 @@
 import { Wheel } from "react-custom-roulette";
 import { useState } from "react";
-import '../styles/main-page-style.css'
+import '../styles/main-page-style.css';
+import quotes from '../data/Quotes.json';
 
 const data = [
     { option: 'Faith and Christianity', style: { backgroundColor: '#ADD8E6', textColor: '#000' } },
@@ -8,12 +9,13 @@ const data = [
     { option: 'Love and Relationships', style: { backgroundColor: '#FFDAB9', textColor: '#000' } },
     { option: 'Courage and Perseverance', style: { backgroundColor: '#FFB6C1', textColor: '#000' } },
     { option: 'Gratitude and Positivity', style: { backgroundColor: '#FFFACD', textColor: '#000' } },
-    { option: 'Reasons why I love you', style: { backgroundColor: '#98FB98', textColor: '#000' } },
+    { option: 'Reason Why I love you', style: { backgroundColor: '#98FB98', textColor: '#000' } },
 ];
 
 export const MainPage = () => {
     const [mustSpin, setMustSpin] = useState(false);
     const [prizeNumber, setPrizeNumber] = useState(0);
+    const [quote, setQuote] = useState('');
 
     const handleSpinClick = () => {
         if (!mustSpin) {
@@ -21,6 +23,14 @@ export const MainPage = () => {
             setPrizeNumber(newPrizeNumber);
             setMustSpin(true);
         }
+    }
+
+    const getRandomQuote = (category) => {
+        // Filter quotes by selected category
+        const categoryQuotes = quotes.filter(q => q.Category === category);
+        // Get a random quote from the filtered category
+        const randomQuote = categoryQuotes[Math.floor(Math.random() * categoryQuotes.length)];
+        return randomQuote ? `"${randomQuote.Sentence}" - ${randomQuote.Source}` : "No quote available.";
     }
 
     return (
@@ -34,30 +44,36 @@ export const MainPage = () => {
                 innerRadius={0}
                 outerBorderWidth={2}
                 textDistance={52}
-                radiusLineWidth={2}    // Adjusts the radius line thickness
-                fontSize={15}          // Increases the font size for better readability
+                radiusLineWidth={2}
+                fontSize={15}
                 onStopSpinning={() => {
                     setMustSpin(false);
+                    // Set a random quote after the wheel stops spinning
+                    setQuote(getRandomQuote(data[prizeNumber].option));
                 }}
             />
+
             <button
                 onClick={handleSpinClick}
                 style={{
-                    backgroundColor: '#FFB6C1',  // Pastel pink background
-                    color: '#fff',               // White text
-                    border: 'none',              // Remove border
-                    padding: '10px 20px',        // Add padding for a better size
-                    borderRadius: '10px',        // Rounded corners
-                    cursor: 'pointer',           // Pointer cursor on hover
-                    fontSize: '16px',            // Font size
-                    transition: '0.3s',          // Smooth transition for hover effects
+                    backgroundColor: '#FFB6C1',
+                    color: '#fff',
+                    border: 'none',
+                    padding: '10px 20px',
+                    borderRadius: '10px',
+                    cursor: 'pointer',
+                    fontSize: '16px',
+                    transition: '0.3s',
                 }}
-                onMouseOver={(e) => e.target.style.backgroundColor = '#FF69B4'} // Change color on hover
-                onMouseOut={(e) => e.target.style.backgroundColor = '#FFB6C1'}  // Reset color after hover
+                onMouseOver={(e) => e.target.style.backgroundColor = '#FF69B4'}
+                onMouseOut={(e) => e.target.style.backgroundColor = '#FFB6C1'}
             >
                 SPIN
             </button>
 
+            {quote && <div className="quote-display" style={{ marginTop: '20px', fontStyle: 'italic', textAlign: 'center' }}>
+                <p>{quote}</p>
+            </div>}
         </div>
     );
 }
