@@ -9,7 +9,7 @@ const data = [
     { option: 'Love and Relationships', style: { backgroundColor: '#FFDAB9', textColor: '#000' } },
     //{ option: 'Courage and Perseverance', style: { backgroundColor: '#FFB6C1', textColor: '#000' } },
     //{ option: 'Gratitude and Positivity', style: { backgroundColor: '#FFFACD', textColor: '#000' } },
-    { option: 'Reasons Why I Love You', style: { backgroundColor: '#98FB98', textColor: '#000' } },
+    { option: 'Reasons Why I Love You', style: { backgroundColor: '#FF0000', textColor: '#FFF' } },
 ];
 
 export const MainPage = () => {
@@ -74,7 +74,7 @@ export const MainPage = () => {
             <button
                 onClick={handleSpinClick}
                 style={{
-                    backgroundColor: '#FFB6C1',
+                    backgroundColor: '#FF0000',
                     color: '#fff',
                     border: 'none',
                     padding: '10px 20px',
@@ -96,7 +96,7 @@ export const MainPage = () => {
                         marginTop: '20px',
                         fontStyle: 'italic',
                         textAlign: 'center',
-                        backgroundColor: '#f0f8ff', // Light blue background for the quote
+                        backgroundColor: '#FF0000', // Light blue background for the quote
                         padding: '20px',
                         borderRadius: '10px',
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
