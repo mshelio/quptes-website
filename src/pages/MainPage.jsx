@@ -4,11 +4,11 @@ import '../styles/main-page-style.css';
 import quotesData from '../data/Quotes.json'; // Import your JSON file
 
 const data = [
-    { option: 'Faith and Christianity', style: { backgroundColor: '#ADD8E6', textColor: '#000' } },
-    { option: 'Wisdom and Life Lessons', style: { backgroundColor: '#E6E6FA', textColor: '#000' } },
+    //{ option: 'Faith and Christianity', style: { backgroundColor: '#ADD8E6', textColor: '#000' } },
+    //{ option: 'Wisdom and Life Lessons', style: { backgroundColor: '#E6E6FA', textColor: '#000' } },
     { option: 'Love and Relationships', style: { backgroundColor: '#FFDAB9', textColor: '#000' } },
-    { option: 'Courage and Perseverance', style: { backgroundColor: '#FFB6C1', textColor: '#000' } },
-    { option: 'Gratitude and Positivity', style: { backgroundColor: '#FFFACD', textColor: '#000' } },
+    //{ option: 'Courage and Perseverance', style: { backgroundColor: '#FFB6C1', textColor: '#000' } },
+    //{ option: 'Gratitude and Positivity', style: { backgroundColor: '#FFFACD', textColor: '#000' } },
     { option: 'Reasons Why I Love You', style: { backgroundColor: '#98FB98', textColor: '#000' } },
 ];
 
