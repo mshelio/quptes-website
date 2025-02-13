@@ -51,7 +51,7 @@ export const MainPage = () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh' }}>
-            <h1 className={'greeting'} >HELLO VARVAR ❤️</h1>
+            <h1 className={'greeting'} >HAPPY VALENTINES VARVOURTE❤️</h1>
 
             <Wheel
                 mustStartSpinning={mustSpin}
