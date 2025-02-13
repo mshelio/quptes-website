@@ -102,8 +102,8 @@ export const MainPage = () => {
                         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
                     }}
                 >
-                    <p style={{ fontSize: '18px', color: '#333' }}>{quote}</p>
-                    {author && <p style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '10px', color: '#666' }}>- {author}</p>}
+                    <p style={{ fontSize: '18px', color: '#fff' }}>{quote}</p>
+                    {author && <p style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '10px', color: '#fff' }}>- {author}</p>}
                 </div>
             )}
         </div>
